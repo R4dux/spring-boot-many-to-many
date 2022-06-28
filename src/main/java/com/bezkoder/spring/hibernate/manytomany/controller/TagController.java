@@ -1,18 +1,17 @@
 package com.bezkoder.spring.hibernate.manytomany.controller;
 
+import com.bezkoder.spring.hibernate.manytomany.exception.ResourceNotFoundException;
+import com.bezkoder.spring.hibernate.manytomany.model.Tag;
+import com.bezkoder.spring.hibernate.manytomany.model.Tutorial;
+import com.bezkoder.spring.hibernate.manytomany.repository.MockDBInitializers;
+import com.bezkoder.spring.hibernate.manytomany.repository.TagRepository;
+import com.bezkoder.spring.hibernate.manytomany.repository.TutorialRepository;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.bezkoder.spring.hibernate.manytomany.exception.ResourceNotFoundException;
-import com.bezkoder.spring.hibernate.manytomany.model.Tag;
-import com.bezkoder.spring.hibernate.manytomany.model.Tutorial;
-import com.bezkoder.spring.hibernate.manytomany.repository.TagRepository;
-import com.bezkoder.spring.hibernate.manytomany.repository.TutorialRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -24,6 +23,20 @@ public class TagController {
 
   @Autowired
   private TagRepository tagRepository;
+  
+  @GetMapping("/initialize")
+  public ResponseEntity<String> initializeDB() {
+      MockDBInitializers dbInitialize = new MockDBInitializers(tutorialRepository, tagRepository);
+      dbInitialize.generateMockData();
+      return(new ResponseEntity<>("DB Initialized", HttpStatus.OK));
+  }
+  
+  @GetMapping("/empty")
+  public ResponseEntity<String> emptyDB() {
+      MockDBInitializers dbInitialize = new MockDBInitializers(tutorialRepository, tagRepository);
+      dbInitialize.emptyDatabase();
+      return(new ResponseEntity<>("DB Emptied", HttpStatus.OK));
+  }
 
   @GetMapping("/tags")
   public ResponseEntity<List<Tag>> getAllTags() {
