@@ -9,6 +9,11 @@ Implement Spring JPA Many-To-Many mapping with Hibernate in a Spring Boot CRUD e
 For more detail, please visit:
 > [Spring Boot Many To Many example with Spring JPA, Hibernate](https://www.bezkoder.com/jpa-many-to-many/)
 
+
+![Swagger UI - http://localhost:8080/swagger-ui/](./swagger-ui.png "Swagger UI")
+
+
+
 More Practice:
 > [Spring Boot One To Many example with Spring JPA, Hibernate](https://www.bezkoder.com/jpa-one-to-many/)
 
@@ -79,3 +84,4 @@ Run both Back-end & Front-end in one place:
 mvn spring-boot:run
 ```
 
+## https://docs.spring.io/spring-boot/docs/1.1.0.M1/reference/html/howto-database-initialization.html
